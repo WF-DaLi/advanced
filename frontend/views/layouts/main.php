@@ -25,46 +25,34 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<div class="top-ban">
+    <a href="http://www.baidu.com" target="_blank">==$0 </a>
+</div>
 <div class="wrap">
-    <?php
-    //NavBar::begin([
-     //   'brandLabel' => Yii::$app->name,
-     //   'brandUrl' => Yii::$app->homeUrl,
-    //    'options' => [
-     //       'class' => 'navbar-inverse navbar-fixed-top',
-     //   ],
-   // ]);
-   // $menuItems = [
-   //     ['label' => 'Home', 'url' => ['/site/index']],
-   //     ['label' => 'About', 'url' => ['/site/about']],
- //       ['label' => 'Contact', 'url' => ['/site/contact']],
-  //  ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-  //      $menuItems[] = '<li>'
-  //          . Html::beginForm(['/site/logout'], 'post')
-  //          . Html::submitButton(
-  //              'Logout (' . Yii::$app->user->identity->username . ')',
-  //              ['class' => 'btn btn-link logout']
- //           )
- //           . Html::endForm()
- //           . '</li>';
-    }
-//    echo Nav::widget([
-//        'options' => ['class' => 'navbar-nav navbar-right'],
-//        'items' => $menuItems,
-//    ]);
-//    NavBar::end();
-    ?>
+    <div class = "bs-container">
+<!--        <div class="navitems">-->
+<!--            <!--        <img src = "//img20.360buyimg.com/da/jfs/t1/4322/13/2820/55709/5b979657Ee0901340/77138e2d20281f29.jpg" class="fa">-->
+<!--        </div>-->
+        <div class="container">
+            <?= $content ?>
+        </div>
+    </div>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <div class="page">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
     </div>
 </div>
 
