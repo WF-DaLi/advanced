@@ -282,6 +282,16 @@ a.desc:after {
     float:right;
 }
 
-.back {
-   width : 444px;
+.pagination {
+    float: right;
+    display: inline-block;
+    padding-right: 180px;
+    border-radius: 4px;
+}
+.page {
+    float : right;
+    width: 800px;
+    height : 50px;
+    margin : 20px 0 0px 0;
+    padding : 0px;
 }

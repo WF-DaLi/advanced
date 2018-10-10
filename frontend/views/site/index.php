@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '省钱,折扣，帮你省' ;
+$this->title = '省钱、折扣、帮你省' ;
 ?>
 <div class="top-ban">
 <img src = "//img20.360buyimg.com/da/jfs/t1/4322/13/2820/55709/5b979657Ee0901340/77138e2d20281f29.jpg" class="fa">
