@@ -2,43 +2,26 @@ html,
 body {
     height: 100%;
     width: 100%;
-    background-color:bisque;
+    background-color : #F2F2F2;
 }
-/*.nav-top-left*/
- /*{*/
-     /*width:100%;*/
-     /*margin: 0 auto 0px;*/
-     /*padding: 0px  -50px 0px;*/
-     /*position: relative;*/
-     /*float: left;*/
- /*}*/
-
-/*.nav-top-right*/
-/*{*/
-    /*width:100;*/
-    /*background-color: blue;*/
-    /*margin: 0 0 -50px 0px;*/
-    /*padding: 0px  0px 0px;*/
-    /*position: relative;*/
-    /*float: right;*/
-/*}*/
 
 .wrap {
     min-height: 100%;
     height: auto;
+    width: 1190px;
     margin: 0 auto -60px;
     padding: 0px  -500px 0px;
 }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
-}
 
 .footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
+    height:60px;
+    width: 1100px !important;
+
+    /*background-color: red;*/
+    /*border-top: 1px solid #ddd;*/
+    padding: 30px;
+    margin: 150px auto 0px;
 }
 
 .jumbotron {
@@ -149,52 +132,66 @@ a.desc:after {
     /*background-color: transparent;*/
 }
 
-.banner {
-    width: 990px;
-    height: 100px;
-    margin: -70px 0 50px -150px;
-    background-color: #00aa00;
+.top-ban {
+    width: 100%;
+    position: relative;
+    z-index: 999;
+    margin: 0 auto;
+    background: url('//img10.360buyimg.com/da/jfs/t1/2073/32/3530/95171/5b99cfc5Ee7047590/7a45e3182d083d64.jpg') no-repeat 50% 0;
+    background-color: #6a11ff;
+    height: 80px;
 }
 
+.navitems {
+    position: relative;
+    width: 1160px;
+    height: 40px;
+    top: 25px;
+    left: 12px;
+    background-color: #0D3349;
+    maring-bottom:45px;
+}
 
-.top-ban {
-     display :  block; 	
-     widht : 100% ;
+.container {
+    position : relative;
+    width : 1200px !important;
+    /*padding-left : 10px  !important;*/
+    top:45px;
+}
 
+.bs-container {
+    position: relative;
+    display : block;
 }
 
 .fa {
-	
-    background: url(web/banner.jpg) no-repeat;
-    left: 0px;
-    right: 0px;
-    top : -70px;	
-    margin-bottom:-20px;	
-    width: 1190px;	
-    position: relative;	
+    position: relative;
 }
+
+/*.nav {*/
+/*position: relative;*/
+/*background-color: #00aa00;*/
+/*margin-top: 30px;*/
+/*width: 2000px;*/
+/*heigth: 50px;*/
+/*}*/
 
 .box_borderis {
     margin: 0  10px 25px 0px;
     width: 224px;
     height: 280px;
     position: absolute;
-    /*box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;*/
 }
 
 .product_box {
     margin: 0px  15px 30px 0px;
     width: 180px;
-    float : left;   
-    background-color : red;
-
+    float : left;
 }
-
-.container {
-    width : 1208px !important;
-    padding-left : 10px !important;  
-   
-} 
+.product_box > a {
+    color : black;
+    text-decoration : none
+}
 
 .box {
     margin-left :   0px !important;
@@ -210,7 +207,7 @@ a.desc:after {
     width: 200px;
     height: 10px;
     margin-top: 2px;
-    padding-left: 5px;	
+    padding-left: 5px;
     display: inline;
 }
 
@@ -222,7 +219,7 @@ a.desc:after {
 }
 
 .coupon_price > em {
-     font-size: 15px;
+    font-size: 15px;
 }
 
 .color_red {
@@ -238,20 +235,21 @@ a.desc:after {
     line-height: 18px;
     width:180px;
     color: #FD3667;
-    padding-top: 5px;  	
+    padding-top: 5px;
 }
 .coupon_desc {
     line-height : 8px;
     height :10px;
     width : 200px;
-    padding-left : 8px;  
+    padding-left : 8px;
 }
 
 
 .coupon_info {
     width:180px;
     background-color:white;
-    font-size: 13px;	
+    padding-top:5px;
+    font-size: 13px;
 }
 .money_info > .midle {
     color:black;
@@ -259,7 +257,7 @@ a.desc:after {
     padding-top:3px;
     margin:1px 5px 0 2px;
     float:left;
- }
+}
 
 .money_info > .left {
     width:55px;
@@ -281,17 +279,14 @@ a.desc:after {
     height: 12px;
     float:right;
 }
-
 .pagination {
     float: right;
+    margin-right:20px;
     display: inline-block;
-    padding-right: 180px;
     border-radius: 4px;
 }
 .page {
     float : right;
-    width: 800px;
-    height : 50px;
-    margin : 20px 0 0px 0;
-    padding : 0px;
+    margin : 20px 0 5px 0;
+
 }

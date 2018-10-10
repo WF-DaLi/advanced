@@ -4,9 +4,6 @@
 
 $this->title = '省钱、折扣、帮你省' ;
 ?>
-<div class="top-ban">
-<img src = "//img20.360buyimg.com/da/jfs/t1/4322/13/2820/55709/5b979657Ee0901340/77138e2d20281f29.jpg" class="fa">
-</div>
 <div class="container">
         <?php
              for($i=1;$i<=24;$i++){
@@ -44,15 +41,4 @@ $this->title = '省钱、折扣、帮你省' ;
         <?php
         }
         ?>
-
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
-
 </div>

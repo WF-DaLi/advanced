@@ -25,55 +25,34 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
+<div class="top-ban">
+</div>
 <div class="wrap">
-    <?php
-    //NavBar::begin([
-     //   'brandLabel' => Yii::$app->name,
-     //   'brandUrl' => Yii::$app->homeUrl,
-    //    'options' => [
-     //       'class' => 'navbar-inverse navbar-fixed-top',
-     //   ],
-   // ]);
-   // $menuItems = [
-   //     ['label' => 'Home', 'url' => ['/site/index']],
-   //     ['label' => 'About', 'url' => ['/site/about']],
- //       ['label' => 'Contact', 'url' => ['/site/contact']],
-  //  ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-  //      $menuItems[] = '<li>'
-  //          . Html::beginForm(['/site/logout'], 'post')
-  //          . Html::submitButton(
-  //              'Logout (' . Yii::$app->user->identity->username . ')',
-  //              ['class' => 'btn btn-link logout']
- //           )
- //           . Html::endForm()
- //           . '</li>';
-    }
-//    echo Nav::widget([
-//        'options' => ['class' => 'navbar-nav navbar-right'],
-//        'items' => $menuItems,
-//    ]);
-//    NavBar::end();
-    ?>
+    <div class = "bs-container">
+      <?= $content ?>
+    </div>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <div class="page">
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">8</a></li>
+            <li><a href="#">9</a></li>
+            <li><a href="#">10</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
     </div>
 </div>
 
 <footer class="footer">
-<!--    <div class="container">-->
-<!--        <p class="pull-left">&copy; --><?//= Html::encode(Yii::$app->name) ?><!-- --><?//= date('Y') ?><!--</p>-->
-<!---->
-<!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
-<!--    </div>-->
+    <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+    <p class="pull-right"><?= Yii::powered() ?></p>
 </footer>
 
 <?php $this->endBody() ?>
