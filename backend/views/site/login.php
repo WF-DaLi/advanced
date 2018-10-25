@@ -10,33 +10,42 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-login col-md-4 col-md-offset-3"  style="background:dimgray;margin-top:80px;width:50%" >
+    <div style="padding-top:20px;width:100%;text-align: center;position: relative">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
+    <div class="row ">
+        <div class="col-md-5 col-md-offset-3" style="margin-top:10px;width:60%;padding-top:10px;position:relative;">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-            <?= $form->field($model, 'password')->passwordInput() ?>
-
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-            <div style="color:#999;margin:1em 0">
-                If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-            </div>
-
-            <div class="form-group">
+            <div class="form-group col-md-offset-4">
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
 
             </div>
 
-            <?php ActiveForm::end(); ?>
-        </div>
+
+                    <?php ActiveForm::end(); ?>
+
+
     </div>
+<!---->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control" id="uname" placeholder=" name">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="password" class="form-control" id="upwd" placeholder="password">-->
+<!--                name: --><?//= $form->field($model, 'password') ?>
+<!--                --><?//= $form->field($model, 'username')->textInput()->hint('Please enter your name')->label('Name') ?>
+<!--            </div>-->
+<!--            <div class="form-group col-md-offset-1" style="margin-top:20px;">-->
+<!--                <input type="button" class="btn  btn-default"  value="sign up">&nbsp;&nbsp;&nbsp;-->
+<!--                <input type="button" class="btn  btn-default col-md-offset-2"  value="login">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 
 
