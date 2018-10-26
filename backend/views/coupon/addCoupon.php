@@ -7,7 +7,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
 <div id="app" >
-    <div class="col-lg-6 ">
+    <div class="m-title">
+        add M2
+    </div>
+    <div class="col-lg-6 " style="margin-top:10px;">
         <i-form :model="formItem" :label-width="80">
             <Form-item label="Input">
                 <i-input v-model="formItem.input" placeholder="Enter something..."></i-input>
