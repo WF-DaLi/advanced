@@ -9,10 +9,6 @@ use common\models\LoginForm;
 use  yii\base\Module;
 use  yii\log;
 
-
-
-
-
 /**
  * Site controller
  */
@@ -41,7 +37,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -76,6 +72,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = false;
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

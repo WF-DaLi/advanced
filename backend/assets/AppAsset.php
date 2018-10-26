@@ -12,9 +12,19 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+        'static/css/site.css',
+        'plugins/layui/css/layui.css',
+        'static/css/iview.css',
     ];
     public $js = [
+        'static/js/jquery/jquery.min.js',
+        'static/js/vue/vue.min.js',
+        'plugins/layui/layui.js',
+        'static/js/vue/iview.min.js',
+    ];
+    public $jsOptions = [
+        //定义js在页面的位置在head标签内部。
+        'position' => \yii\web\View::POS_HEAD,
     ];
     public $depends = [
         'yii\web\YiiAsset',
