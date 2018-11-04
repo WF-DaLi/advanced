@@ -15,6 +15,7 @@ class AppAsset extends AssetBundle
         'static/css/site.css',
         'plugins/layui/css/layui.css',
         'static/css/iview.css',
+        'plugins/layui/css/modules/layer/default/layer.css',
     ];
     public $js = [
         'static/js/jquery/jquery.min.js',

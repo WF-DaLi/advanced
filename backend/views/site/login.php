@@ -25,7 +25,7 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
-<div class="wrap layui-bg-black">
+<div class=" wrap layui-bg-black">
     <div class="container">
         <div class="site-login col-md-4 col-md-offset-3"  style="background:dimgray;margin-top:80px;width:50%" >
             <div style="padding-top:20px;width:100%;text-align: center;position: relative">

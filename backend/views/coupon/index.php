@@ -4,6 +4,9 @@ use backend\assets\AppAsset;
 
 $this->title = 'lists';
 ?>
+<style>
+    body {overflow-y: scroll;}
+</style>
 <div id="app" class="layout"  style="margin-left:10px;">
     <Layout>
         <Header>
@@ -14,11 +17,16 @@ $this->title = 'lists';
         </Header>
         <Content>
             <div style="margin-top:10px;">
-                <i-table style="width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>
+                <i-table style=" width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>
             </div>
         </Content>
+        <div style="margin-top:-20px;" id="pager"></div>
     </Layout>
 </div>
+<?
+//var_dump($coupons);
+
+?>
 
 <script src="/static/js/vue/iview.min.js"></script>
 <script>
@@ -31,51 +39,109 @@ $this->title = 'lists';
             columns1: [
                 {
                     title: 'ID',
-                    key: 'ID'
+                    key: 'product_id',
+                    width:100
                 },
                 {
-                    title: 'Name',
-                    key: 'name'
+                    title: '名称',
+                    key: 'name',
+                    width:200
                 },
                 {
-                    title: 'Age',
-                    key: 'age'
+                    title: '类别',
+                    key: 'cate',
+                    width:80
                 },
                 {
-                    title: 'Address',
-                    key: 'address'
+                    title: '店铺',
+                    key: 'storeName',
+                    width:80
+                },
+                {
+                    title: '价格',
+                        key:'price',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'sale',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'couponPrice',
+                    width:80
+                },{
+                    title: 'ID',
+                    key: 'product_id',
+                    width:100
+                },
+                {
+                    title: '名称',
+                    key: 'name',
+                    width:100
+                },
+                {
+                    title: '类别',
+                    key: 'cate',
+                    width:80
+                },
+                {
+                    title: '店铺',
+                    key: 'storeName',
+                    width:80
+                },
+                {
+                    title: '价格',
+                    key:'price',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'sale',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'couponPrice',
+                    width:80
+                },{
+                    title: 'ID',
+                    key: 'product_id',
+                    width:100
+                },
+                {
+                    title: '名称',
+                    key: 'name',
+                    width:100
+                },
+                {
+                    title: '类别',
+                    key: 'cate',
+                    width:80
+                },
+                {
+                    title: '店铺',
+                    key: 'storeName',
+                    width:80
+                },
+                {
+                    title: '价格',
+                    key:'price',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'sale',
+                    width:60
+                },
+                {
+                    title: '券价格',
+                    key:'couponPrice',
+                    width:80
                 }
             ],
-            data1: [
-                {
-                    ID:1,
-                    name: 'John Brown',
-                    age: 18,
-                    address: 'New York No. 1 Lake Park',
-                    date: '2016-10-03'
-                },
-                {
-                    ID:1,
-                    name: 'Jim Green',
-                    age: 24,
-                    address: 'London No. 1 Lake Park',
-                    date: '2016-10-01'
-                },
-                {
-                    ID:1,
-                    name: 'Joe Black',
-                    age: 30,
-                    address: 'Sydney No. 1 Lake Park',
-                    date: '2016-10-02'
-                },
-                {
-                    ID:1,
-                    name: 'Jon Snow',
-                    age: 26,
-                    address: 'Ottawa No. 2 Lake Park',
-                    date: '2016-10-04'
-                }
-            ]
+            data1: <?=$coupons?>
         },
         methods:{
             checkForm: function (e) {
@@ -102,6 +168,25 @@ $this->title = 'lists';
 </script>
 
 <script>
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'pager'
+            ,count: 100 //数据总数，从服务端得到
+            ,limit:10
+            ,jump: function(obj, first){
+                //obj包含了当前分页的所有参数，比如：
+                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log(obj.limit); //得到每页显示的条数
+
+                //首次不执行
+                if(!first){
+                    //do something
+                }
+            }
+        });
+    });
 
     $(document).ready(function(){
         $('#clid').click(function(){
