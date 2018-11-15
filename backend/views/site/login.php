@@ -34,7 +34,7 @@ AppAsset::register($this);
             <div class="row ">
                 <div class="col-md-5 col-md-offset-3" style="margin-top:10px;width:60%;padding-top:10px;position:relative;">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Name') ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
                     <div class="form-group col-md-offset-4">
                         <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>

@@ -1,5 +1,5 @@
 <?php
-    namespace  backend\controllers;
+    namespace  backend\controllers\coupon;
     use Yii;
     use yii\web\Controller;
     use yii\filters\VerbFilter;
@@ -8,12 +8,13 @@
     use backend\models\coupon\Coupon;
     use backend\models\coupon\CouponForm;
     use yii\web\Response;
-    use \PhpOffice\PhpSpreadsheet\IOFactory;	  
+    use \PhpOffice\PhpSpreadsheet\IOFactory;
+    use backend\controllers\AdminController;
 
      /**
      * coupon controller
      */
-    class CouponController extends Controller
+    class CouponController extends AdminController
     {
         public $enableCsrfValidation = false;
         /**
@@ -54,17 +55,14 @@
         }
         public function actionLists()
         {
-	
 
 //	$phpExcel =  new IOFactory();
 	$excelReader = IOFactory::createReader('Xlsx');
 	$excelSheet = $excelReader->load('/tmp/abc.xlsx');
 	$currentSheet = $excelSheet->getActiveSheet();
 	$rowNum = $currentSheet->getHighestRow();
-	var_dump($rowNum);die;
-	
-	var_dump($nt);die;
-         var_dump($ok);die;
+
+            echo 88;die;
 
 
             $query = Coupon::find();
@@ -109,7 +107,6 @@
         public function actionAdd()
         {
             $vars = Yii::$app->request->post();
-//            var_dump($vars);die;
             $model = new CouponForm();
             return $this->render('/coupon/addCoupon', [ 'model' => $model]);
         }

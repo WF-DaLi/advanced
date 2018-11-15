@@ -1,17 +1,17 @@
 <?php
-    namespace  backend\controllers;
+    namespace  backend\controllers\admin;
 
     use Yii;
     use yii\db\Query;
-    use yii\web\Controller;
+    use backend\controllers\AdminController;
     use yii\filters\VerbFilter;
     use yii\filters\AccessControl;
-    use backend\models\sass\Sass;
+    use common\models\User;
 
      /**
      * coupon controller
      */
-    class SassController extends Controller
+    class UserController extends AdminController
     {
         public $enableCsrfValidation = false;
         /**
@@ -26,6 +26,7 @@
                         [
                             'actions' => ['lists','add','addsass','importexcel'],
                             'allow' => true,
+                            'roles' => ['@'],
                         ]
                     ],
                 ],
@@ -53,10 +54,11 @@
         public function actionLists()
         {
 	        $query = new Query;//Sass::find();
-            $res = $query->select(['id', 'name','status'])
-                        ->from('sass')
+            $res = $query->select(['id', 'username','email','userimg','created_at','updated_at','status','userstatus'])
+                        ->from('user')
                         ->orderBy('id')
                         ->all();
+//            var_($res);die;
             return $this->render('/sass/lists',['sass'=>json_encode($res,JSON_UNESCAPED_UNICODE )]);
         }
         public function actionAdd()
