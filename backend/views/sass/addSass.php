@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
             addsass:function(sassName){
                 var _this = this;
                 if(sassName != ''){
-                    $.post('index.php?r=sass/addsass',{name:sassName},function(){
+                    $.post('index.php?r=sass/sass/addsass',{name:sassName},function(){
                         layui.use(['layer'], function(){
                             var layer = layui.layer;
                             layer.confirm(
@@ -53,7 +53,7 @@ use yii\widgets\ActiveForm;
                                      icon:1
                                  },
                                  function(){
-                                    window.location = 'index.php?r=sass/lists';
+                                    window.location = 'index.php?r=sass/sass/lists';
                                  })
                         });
                     });

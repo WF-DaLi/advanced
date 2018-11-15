@@ -64,6 +64,8 @@ use yii\widgets\ActiveForm;
         </i-form>
     </div>
 </div>
+<div>
+</div>
 <script>
     const app = new Vue({
         el: '#app',
@@ -93,24 +95,7 @@ use yii\widgets\ActiveForm;
             formItem: {
                 input: '',
                 opt:'',
-                select: [
-                    {
-                        ID:1,
-                        name: '天猫'
-                    },
-                    {
-                        ID:2,
-                        name: '京东'
-                    },
-                    {
-                        ID:3,
-                        name: '1号店'
-                    },
-                    {
-                        ID:4,
-                        name: '苏宁易购'
-                    }
-                ],
+                select: <?=$sass?>,
                 radio: 'male',
                 checkbox: [
                     {

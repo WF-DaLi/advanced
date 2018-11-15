@@ -59,7 +59,11 @@
                         ->orderBy('id')
                         ->all();
 //            var_dump($res);die;
-            return $this->render('/user/lists',['users'=>json_encode($res,JSON_UNESCAPED_UNICODE )]);
+            return $this->render('/user/lists',
+			['users'=>json_encode($res,JSON_UNESCAPED_UNICODE),
+			'role'=>json_encode([['id'=>10,'name'=>'普通用户'],['id'=>2,'name'=>'管理员']],JSON_UNESCAPED_UNICODE)
+			]
+			);
         }
         public function actionAdd()
         {

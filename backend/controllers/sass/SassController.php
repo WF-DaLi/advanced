@@ -1,5 +1,5 @@
 <?php
-    namespace  backend\controllers;
+    namespace  backend\controllers\sass;
 
     use Yii;
     use yii\db\Query;
@@ -7,13 +7,16 @@
     use yii\filters\VerbFilter;
     use yii\filters\AccessControl;
     use backend\models\sass\Sass;
+    use yii\web\User;
+    use backend\controllers\AdminController;
 
      /**
      * coupon controller
      */
-    class SassController extends Controller
+    class SassController extends AdminController
     {
         public $enableCsrfValidation = false;
+        public $layout_user;
         /**
          * {@inheritdoc}
          */
@@ -24,7 +27,7 @@
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
-                            'actions' => ['lists','add','addsass','importexcel'],
+                            'actions' => ['lists','add','addsass','importexcel','updatestatus'],
                             'allow' => true,
                             'roles' => ['@'],
                         ]
@@ -53,7 +56,8 @@
         }
         public function actionLists()
         {
-	        $query = new Query;//Sass::find();
+         //   $this->layout_user = Yii::$app->user->identity->username;
+	        $query = new Query;
             $res = $query->select(['id', 'name','status'])
                         ->from('sass')
                         ->orderBy('id')
@@ -72,6 +76,19 @@
                 $sass = new Sass();
                 $sass->name = $sassName;
                 $sass->save();
-            }
+            }	
         }
+	public function actionUpdatestatus()
+	{
+	   $sassId = Yii::$app->request->post("sass_id");
+	   $status = Yii::$app->request->post('status');
+	   if(Yii::$app->request->post('sass_id')){
+		//$sass = new Sass();
+    		//$sass->primaryKey = 'id';
+	        $sass = Sass::findOne($sassId);
+		$sass->status = $status;
+	        $sass->update();
+	  }
+	 // Yii::$app->response->sedFile('abc',22);
+	}
     }

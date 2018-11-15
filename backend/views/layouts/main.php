@@ -93,7 +93,7 @@ use common\widgets\Alert;
     </div>
 
     <div class="layui-footer">
-        © layui.com - 底部固定区域
+        powered by eric@yii.com
     </div>
 </div>
 <script>

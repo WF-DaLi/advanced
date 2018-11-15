@@ -16,6 +16,7 @@ class AdminController extends Controller
         public function init()
         {
             $this->user = Yii ::$app->user->identity->username?? '';
+	    //$this->user = 'admin';
         }
 
 

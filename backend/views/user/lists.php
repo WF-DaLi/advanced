@@ -26,29 +26,35 @@ $this->title = '用户列表';
     <div class="form-group">
         <label class="col-sm-3">name:</label>
         <div class="col-sm-8" style="margin-left:-20px;height:10px;">
-            <i-input type="text" value="sdsfsdfsd">
+            <i-input type="text" value="" placeholder='username'>
         </div>
     </div><br>
         <div class="form-group">
             <label class="col-sm-3">pwd:</label>
             <div class="col-sm-8" style="margin-left:-20px;">
-                <i-input type="text" value="sdsfsdfsd">
+                <i-input type="text" value="" placeholder='passwd'>
+            </div>
+        </div><br>
+
+        <div class="form-group">
+            <label class="col-sm-3">confirm:</label>
+            <div class="col-sm-8" style="margin-left:-20px;">
+                <i-input type="text" value="" placeholder='passwd confirmed'>
             </div>
         </div><br>
         <div class="form-group">
-            <label class="col-sm-3">角色:</label>
+            <label class="col-sm-3">role:</label>
             <div class="col-sm-8" style="margin-left:-20px;">
                 <i-select v-model="role">
-                    <option></option>
+                    <i-option v-for="item in roles" :value="item.id">{{item.name}}</i-option>
                 </i-select>
             </div>
         </div><br>
         <div class="form-group">
-            <label class="col-sm-3">状态:</label>
+            <label class="col-sm-3">status:</label>
             <div class="col-sm-8" style="margin-left:-20px;">
-               <i-select v-model="role">
-                   <option>启用</option>
-                   <option>禁用</option>
+               <i-select v-model="current_status">
+                   <i-option v-for="item in status" :value="item.id">{{item.name}}</i-option>
                </i-select>
             </div>
         </div><br>
@@ -67,8 +73,10 @@ $this->title = '用户列表';
         el: '#app',
         data: {
             isShow:false,
-            // role:'[{"id":'1',"role":"管理员"},{"id":"2","role":"普通用户"}]',
-            role:'',
+            roles:<?=$role?>,
+	    role:'',
+	    current_status:'1',
+	    status:[{"id":1,"name":"启用"},{"id":0,"name":"禁用"}],	
             users_column: [
                 {
                     title: 'ID',

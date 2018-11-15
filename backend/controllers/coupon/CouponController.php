@@ -1,15 +1,15 @@
 <?php
     namespace  backend\controllers\coupon;
     use Yii;
-    use yii\web\Controller;
     use yii\filters\VerbFilter;
     use yii\filters\AccessControl;
     use yii\data\Pagination;
     use backend\models\coupon\Coupon;
     use backend\models\coupon\CouponForm;
-    use yii\web\Response;
     use \PhpOffice\PhpSpreadsheet\IOFactory;
     use backend\controllers\AdminController;
+    use yii\db\Query;
+    use backend\models\sass\Sass;
 
      /**
      * coupon controller
@@ -62,7 +62,10 @@
 	$currentSheet = $excelSheet->getActiveSheet();
 	$rowNum = $currentSheet->getHighestRow();
 
-            echo 88;die;
+//	var_dump($rowNum);die;
+	
+//	var_dump($nt);die;
+  //       var_dump($ok);die;
 
 
             $query = Coupon::find();
@@ -108,7 +111,14 @@
         {
             $vars = Yii::$app->request->post();
             $model = new CouponForm();
-            return $this->render('/coupon/addCoupon', [ 'model' => $model]);
+	    $sassQuery  = new Query;
+	    $sassRes = $sassQuery->select(['id','name'])->from('sass')->where(['status'=>1])->orderBy('id')->all();
+	    //var_dump($sassRes);die; 
+            return $this->render('/coupon/addCoupon', 
+				['model' => $model,
+				 'sass'=>json_encode($sassRes,JSON_UNESCAPED_UNICODE)
+				]
+				);
         }
 
         public function action()

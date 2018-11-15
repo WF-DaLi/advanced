@@ -20,7 +20,7 @@ $this->title = 'lists';
                 <i-table style=" width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>
             </div>
         </Content>
-        <div style="margin-top:-20px;" id="pager"></div>
+        <div style="postion:relative;float:right;margin-top:-20px;" id="pager"></div>
     </Layout>
 </div>
 <?

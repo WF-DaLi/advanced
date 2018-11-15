@@ -42,35 +42,53 @@ $this->title = 'Sass lists';
                     title: '状态',
                     key:'status',
                     render:function (h,param) {
-                        var status = '',  dstatus = param.row.status;
+                        var dstatus = param.row.status;
+			var currentColor ='';
                         if(dstatus ==1 ){
                            status = '启用';
+			   currentColor = 'green';
                         }else{
                             status = '禁用';
+		            currentColor = 'red';		
                         }
-                        return h('span',status);
+                        return h('span',
+				{
+				 style:{
+					color:currentColor
+					}
+				},
+				status);
                     }
                 },
                 {
                     title:"操作",
                     render:function (h,param) {
+                       var sass_id = param.row.id ;
+		       var status = param.row.status;
+		       var optionStatus = '';
+		       if(status == 0){
+		            optionName = '启用';	  
+			    optionColor = 'green';
+			    optionStatus = 1;
+			}else{
+		            optionName = '禁用';		
+		            optionColor = 'red';
+			    optionStatus = 0;
+			}
                        var opt = [
-                            h('a',{
-                            attrs:{
-                                "href":"http://www.1111111111",
-                            }
-                        },'启用'),
-                            h('a',{
-                                attrs:{
-                                    "href":"http://www.22222222222222",
-                                },
-                                style:{
-                                    marginLeft:"10px",
-                                }
-                            },'禁用')
-
-                        ];
-                       return h('span',opt)
+                           h('span',{
+                               style:{
+                                   color:optionColor,
+                               },
+                               on: {
+                                   click: function(){
+                                       app.updateStatus(sass_id,optionStatus)
+                                   }
+                               }
+                                },optionName),
+	
+                       	    ];
+                       return h('a',opt)
                     }
                 }
             ],
@@ -78,7 +96,28 @@ $this->title = 'Sass lists';
         },
         methods:{
             addsass: function () {
-                window.location = 'index.php?r=sass/add';
+                window.location = 'index.php?r=sass/sass/add';
+            },
+            updateStatus:function(sassId,status){
+		console.log(status);
+                $.post('/index.php?r=sass/sass/updatestatus',{sass_id:sassId,status:status},function(res){
+			console.log(res);
+		    if(true){
+			app.$Modal.success({
+			     title:' ',
+			     content:'操作成功!',
+			     onOk:() => {
+				   window.location.reload();
+				}
+			})
+		    }else{
+			app.$Modal.error({
+			    title:'操作提示',
+			    content: '操作失败'
+			})
+		     }
+                })
+
             }
         }
     })
