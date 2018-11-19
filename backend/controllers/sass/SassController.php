@@ -83,8 +83,6 @@
 	   $sassId = Yii::$app->request->post("sass_id");
 	   $status = Yii::$app->request->post('status');
 	   if(Yii::$app->request->post('sass_id')){
-		//$sass = new Sass();
-    		//$sass->primaryKey = 'id';
 	        $sass = Sass::findOne($sassId);
 		$sass->status = $status;
 	        $sass->update();

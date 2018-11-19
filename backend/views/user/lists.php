@@ -1,15 +1,19 @@
 <?php
 
 use backend\assets\AppAsset;
-
+use yii\bootstrap\ActiveForm;
 $this->title = '用户列表';
 ?>
+
 <style>
+  .form-group {
+		margin-bottom:20px;
+	      }
 </style>
 <div id="app" class="layout"  style="margin-left:10px;">
     <Layout>
         <Content>
-            <i-button type="success" style="margin:10px 5px 0 10px;" v-on:click="updateuser()">新增用户</i-button>
+            <i-button type="success" style="margin:10px 5px 0 10px;" v-on:click="adduser()">新增用户</i-button>
             <div style="margin-top:10px;">
                 <i-table style=" width:100%; margin-bottom: 15px;" border :columns="users_column" :data="users" ></i-table>
             </div>
@@ -20,28 +24,36 @@ $this->title = '用户列表';
     <Modal
      v-model="isShow"
     title="添加用户"
-    width="360"
-     height = "700"
+    width="500"
+     height = "800"
+     @on-ok='ok'
+     @on-cancel='cancel'
     >
     <div class="form-group">
         <label class="col-sm-3">name:</label>
-        <div class="col-sm-8" style="margin-left:-20px;height:10px;">
-            <i-input type="text" value="" placeholder='username'>
+        <div class="col-sm-8 required has-success" style="margin-left:-20px;height:10px;">
+            <i-input id='username' v-validate:username="{required:true}" v-model="username" type="text" @on-blur="testName" placeholder='username'>
         </div>
     </div><br>
         <div class="form-group">
             <label class="col-sm-3">pwd:</label>
-            <div class="col-sm-8" style="margin-left:-20px;">
-                <i-input type="text" value="" placeholder='passwd'>
+            <div class="col-sm-8" style="margin-left:-20px;boder-color:#green;">
+                <i-input v-model="password" type="text" value="" placeholder='passwd'>
             </div>
         </div><br>
 
         <div class="form-group">
             <label class="col-sm-3">confirm:</label>
-            <div class="col-sm-8" style="margin-left:-20px;">
+            <div class="col-sm-8 has_success" style="margin-left:-20px;">
                 <i-input type="text" value="" placeholder='passwd confirmed'>
             </div>
         </div><br>
+	<div class="form-group">
+	   <label class="col-sm-3">email:</label>
+	   <div class = "col-sm-8" style="margin-left:-20px;">
+		<i-input v-model="email" type="text" placeholder ="user@mlab.com">
+	   </div>
+	</div><br>
         <div class="form-group">
             <label class="col-sm-3">role:</label>
             <div class="col-sm-8" style="margin-left:-20px;">
@@ -53,17 +65,11 @@ $this->title = '用户列表';
         <div class="form-group">
             <label class="col-sm-3">status:</label>
             <div class="col-sm-8" style="margin-left:-20px;">
-               <i-select v-model="current_status">
-                   <i-option v-for="item in status" :value="item.id">{{item.name}}</i-option>
+               <i-select v-model="currentStatus">
+                   <i-option v-for="item in userstatus" :value="item.id">{{item.name}}</i-option>
                </i-select>
             </div>
         </div><br>
-<!--    <div class="form-group">-->
-<!--        <div class="col-sm-12 other_reason " style="margin:20px auto 10px;" >-->
-<!--            <textarea type="text"  class="form-control textreason"  rows="8" maxlength="500" ></textarea>-->
-<!---->
-<!--        </div>-->
-<!--    </div>-->
     </Modal>
 </div>
 
@@ -73,10 +79,13 @@ $this->title = '用户列表';
         el: '#app',
         data: {
             isShow:false,
-            roles:<?=$role?>,
 	    role:'',
-	    current_status:'1',
-	    status:[{"id":1,"name":"启用"},{"id":0,"name":"禁用"}],	
+            roles:<?=$role?>,
+	    currentStatus:'',
+	    username:'',
+	    password:'',
+	    email:'',
+	    userstatus:[{"id":1,"name":"启用"},{"id":0,"name":"禁用"}],	
             users_column: [
                 {
                     title: 'ID',
@@ -109,7 +118,7 @@ $this->title = '用户列表';
                         if(dstatus == '1' ){
                            status = '正常';
                         }else{
-                            status = '禁用';
+                           status = '禁用';
                         }
                         return h('span',status);
                     }
@@ -117,20 +126,33 @@ $this->title = '用户列表';
                 {
                     title:"操作",
                     render:function (h,param) {
+                       var uid = param.row.id;
+	               var status =param.row.userstatus;
+		       var optStatus = 1;
+		       var statusName = '启用';
+		       var statusColor = 'green';
+			if(status ==1 ){
+			    statusName = '禁用'
+			    statusColor = 'red';
+			    optStatus = 0;
+			}
                        var opt = [
                             h('a',{
                             attrs:{
-                                "href":"http://www.1111111111",
+                                "href":"#",
                             }
                             },'编辑'),
                             h('a',{
-                                attrs:{
-                                    "href":"http://www.22222222222222",
+                                on:{
+			            click:function(){
+					 app.updatestatus(uid,optStatus);
+					} 
                                 },
                                 style:{
                                     marginLeft:"10px",
+				    color:statusColor,
                                 }
-                            },'禁用')
+                            },statusName)
 
                         ];
                        return h('span',opt)
@@ -140,41 +162,41 @@ $this->title = '用户列表';
             users: <?=$users?>
         },
         methods:{
-            updateuser: function () {
+            adduser: function () {
                 this.isShow = true;
-            }
+	        this.currentStatus = 1;
+		this.role = 10;
+            },
+	    ok: function(){
+	        $.post('index.php?r=admin/user/adduser',{'username':this.username,'password':this.password,'role':this.role,'status':this.currentStatus,'email':this.email},function(res){
+		 app.$Modal.success({
+	               title:'操作提示',		 	
+		       content:'操作成功'
+		 });
+		});
+	   },
+	    cancel: function(){
+	   },
+	    updatestatus:function(uid,status){
+		$.post('index.php?r=admin/user/updatestatus',{'uid':uid,'status':status},function(res){
+		   app.$Modal.success({
+			title:'操作提示',
+			content:'操作成功',
+			onOk:()=>{
+			  window.location.reload();
+			}
+			})
+		});
+	    },
+	    testName: function(){
+		$.post('index.php?r=admin/user/checkuserexist',{'uname':this.username},function(res){
+		   if(res == 1){
+                       $('#username input').attr('style','border-color:red');		
+		    }else{
+                       $('#username input').attr('style','border-color:green');		
+		    }	   
+                });
+	  }
         }
     })
-</script>
-
-<script>
-    // layui.use('laypage', function(){
-    //     var laypage = layui.laypage;
-    //     //执行一个laypage实例
-    //     laypage.render({
-    //         elem: 'pager'
-    //         ,count: 100 //数据总数，从服务端得到
-    //         ,limit:10
-    //         ,jump: function(obj, first){
-    //             //obj包含了当前分页的所有参数，比如：
-    //             console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-    //             console.log(obj.limit); //得到每页显示的条数
-    //
-    //             //首次不执行
-    //             if(!first){
-    //                 //do something
-    //             }
-    //         }
-    //     });
-    // });
-
-//    $(document).ready(function(){
-//        $('#clid').click(function(){
-//            layui.use('layer', function(){
-//                var layer = layui.layer;
-//                layer.msg('hello');
-//            });
-//
-//        });
-//    });
 </script>

@@ -7,6 +7,7 @@
     use yii\filters\VerbFilter;
     use yii\filters\AccessControl;
     use common\models\User;
+    use common\models\AdduserForm;
 
      /**
      * coupon controller
@@ -24,7 +25,7 @@
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
-                            'actions' => ['lists','add','addsass','importexcel'],
+                            'actions' => ['lists','checkuserexist','add','adduser','addsass','importexcel','updatestatus'],
                             'allow' => true,
                             'roles' => ['@'],
                         ]
@@ -51,32 +52,53 @@
                 ],
             ];
         }
+
+    
         public function actionLists()
         {
-	        $query = new Query;//Sass::find();
+	        $query = new Query;
             $res = $query->select(['id', 'username','email','userimg','created_at','updated_at','status','userstatus'])
                         ->from('user')
                         ->orderBy('id')
                         ->all();
-//            var_dump($res);die;
             return $this->render('/user/lists',
 			['users'=>json_encode($res,JSON_UNESCAPED_UNICODE),
 			'role'=>json_encode([['id'=>10,'name'=>'普通用户'],['id'=>2,'name'=>'管理员']],JSON_UNESCAPED_UNICODE)
 			]
 			);
         }
-        public function actionAdd()
-        {
-            return $this->render('/sass/addSass');
-        }
+	
+	public function actionAdduser()
+	{
+	     $user = new AdduserForm();	
+	     $user->username = Yii::$app->request->post('username');
+	     $user->password = Yii::$app->request->post('password');
+             $user->status = Yii::$app->request->post('role');
+	     $user->userstatus = Yii::$app->request->post('status');
+	     $user->email = Yii::$app->request->post('email');	
+	     $user->adduser(false);	
+         }
 
-        public function actionAddsass()
-        {
-            $sassName = Yii::$app->request->post('name');
-            if(!empty($sassName)){
-                $sass = new Sass();
-                $sass->name = $sassName;
-                $sass->save();
-            }
-        }
+	public function actionUpdatestatus()
+	{	
+	     $uid = Yii::$app->request->post('uid');	
+	     $status = Yii::$app->request->post('status');
+	     if($uid > 0 ){
+	        $user = User::findOne($uid);     
+                $user->userstatus = $status;
+	        $user->save();
+	     }	
+	}		
+	public function actionCheckuserexist()
+	{
+	      $userName = Yii::$app->request->post('uname');
+	      $query = new Query();
+	      $user = $query->select(['id'])->from('user')->where(['username'=>$userName])->count();
+	      if($user > 0){
+		 return true;
+              }else{
+		return false;
+	      }
+	    
+	}	
     }

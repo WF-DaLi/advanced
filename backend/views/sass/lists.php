@@ -101,7 +101,6 @@ $this->title = 'Sass lists';
             updateStatus:function(sassId,status){
 		console.log(status);
                 $.post('/index.php?r=sass/sass/updatestatus',{sass_id:sassId,status:status},function(res){
-			console.log(res);
 		    if(true){
 			app.$Modal.success({
 			     title:' ',
