@@ -7,11 +7,11 @@ use yii\base\Model;
 /**
  * Login form
  */
-class AdduserForm extends Model
+class UserForm extends Model
 {
     public $username;
     public $password;
-    public $status = 10;
+    public $status = 2;
     public $userstatus = 1;
     public $userimg = ''; 
     public $email = '';
@@ -60,7 +60,7 @@ class AdduserForm extends Model
 	$user->status= $this->status;
 	$user->userstatus= $this->userstatus;
 	$user->email = !empty($this->email)? $this->email:$this->username.'@mlab.com';
-	$user->save();   
+	$user->save(false);   
    }
      
 }
