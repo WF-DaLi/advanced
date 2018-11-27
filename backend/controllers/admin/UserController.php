@@ -75,7 +75,7 @@
 	     $user = new UserForm();
 	     $user->username = Yii::$app->request->post('username');
 	     $user->password = Yii::$app->request->post('password');
-         $user->status = Yii::$app->request->post('role');
+             $user->status = Yii::$app->request->post('role');
 	     $user->userstatus = Yii::$app->request->post('status');
 	     $user->email = Yii::$app->request->post('email');	
 	     $user->adduser(false);	

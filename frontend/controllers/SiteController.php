@@ -12,7 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use yii\db\Query;
 /**
  * Site controller
  */
@@ -72,8 +72,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
+	$query = new Query();
+	$results = $query->select('product_id','name')->from('coupon')->limit(100)->all();
+	var_dump($results);die;
         $request = Yii::$app->request;
+	
 	$page = $request->get('pn',1);
         return $this->render('index',['pn'=>$page]);
     }

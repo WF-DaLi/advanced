@@ -7,35 +7,37 @@ $this->title = 'lists';
     body {overflow-y: scroll;}
 </style>
 <div id="app" class="layout"  style="margin-left:10px;">
-<!--    <Layout>-->
-<!--        <Header>-->
-<!--            <div style="position:relative;margin:10px 0 0 10px;width:200px;">-->
-<!--                <i-input search enter-button="查找" placeholder="input name"  style="width: 250px" /></br>-->
-<!--            </div>-->
-<!--            <div style="margin:-30px 0 0 -32px;">-->
-<!--                <i-button v-on:click="add" type="primary"  style="width: 50px;margin-left:300px;" />添加</i-button>-->
-<!--                <i-button v-on:click="imporCoupon" type="primary"  style="width: 100px;margin-left:5px;" />批量导入</i-button>-->
-<!--            </div>-->
-<!--        </Header>-->
-<!--        <Content>-->
-<!--            <div style="margin-top:10px;">-->
-<!--                <i-table style=" width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>-->
-<!--            </div>-->
-<!--        </Content>-->
-<!--        <div style="postion:relative;float:right;margin-top:-20px;" id="pager"></div>-->
-<!--    </Layout>-->
+    <Layout>
+        <Header>
+            <div style="position:relative;margin:10px 0 0 10px;width:200px;">
+                <i-input search enter-button="查找" placeholder="input name"  style="width: 250px" /></br>
+            </div>
+            <div style="margin:-31px 0 0 -32px;">
+                <i-button v-on:click="add" type="primary"  style="width: 50px;height:32px;margin-left:300px;" />添加</i-button>
+                <i-button v-on:click="imporCoupon" type="primary"  style="width: 80px;height:32px;margin-left:5px;" />批量导入</i-button>
+            </div>
+        </Header>
+        <Content>
+            <div style="margin-top:10px;">
+                <i-table style=" width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>
+            </div>
+        </Content>
+        <div style="postion:relative;float:right;margin-top:-20px;" id="pager"></div>
+    </Layout>
 
 
     <Modal v-model="isShow" width="360" :mask-closable="false">
         <p slot="header" style="color:#f60;text-align:center">
             <Icon type="ios-information-circle"></Icon>
-            <span>Delete confirmation</span>
+            <span>批量导入数据</span>
         </p>
         <div style="text-align:left">
-            <p>选择要导入的文件excel文件注意文件格式</p>
-            <Upload action="//jsonplaceholder.typicode.com/posts/">
-                <Button icon="ios-cloud-upload-outline">选择文件</Button>
-            </Upload>
+            <p>选择要导入的excel文件,注意文件格式</p>
+            <div>
+	    	<Upload action="//jsonplaceholder.typicode.com/posts/">
+                 <Button icon="ios-cloud-upload-outline">选择文件</Button>
+               </Upload>
+	   </div>
         </div>
         <div slot="footer">
             <i-button type="success" size="large"  @click="imporCoupon">开始导入</i-button>
@@ -49,7 +51,7 @@ $this->title = 'lists';
     const app = new Vue({
         el: '#app',
         data: {
-            isShow: true,
+            isShow: false,
             value2: '',
             value3: '',
             columns1: [
@@ -180,7 +182,7 @@ $this->title = 'lists';
                 window.location.href = 'index.php?r=coupon/coupon/add';
             },
             imporCoupon:function(){
-                console.log(9999999999);
+		this.isShow = true;
             }
         }
     })
