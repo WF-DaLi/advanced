@@ -27,7 +27,7 @@
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
-                            'actions' => ['lists','add','addsass','t','importexcel'],
+                            'actions' => ['lists','add','addsass','fenxi','importexcel'],
                             'allow' => true,
                         ]
                     ],
@@ -53,6 +53,10 @@
                 ],
             ];
         }
+	public function actionFenxi()
+	{
+		return $this->render('/fenxi/index.php');
+	}
         public function actionLists()
         {
 

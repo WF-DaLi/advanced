@@ -22,12 +22,14 @@ $this->title = 'lists';
                 <i-table style=" width:100%; margin-bottom: 15px;" border :columns="columns1" :data="data1" ></i-table>
             </div>
         </Content>
-        <div style="postion:relative;float:right;margin-top:-20px;" id="pager"></div>
+	<div style="width:100%;height:35px;">
+        	<Page :total="total" show-total show-elevator show-sizer @on-change="changepage"  style="float:right;margin:-10px 100px 0 0;">
+	</div>
     </Layout>
 
 
     <Modal v-model="isShow" width="360" :mask-closable="false">
-        <p slot="header" style="color:#f60;text-align:center">
+        <p slot="header" style="color:#f60;">
             <Icon type="ios-information-circle"></Icon>
             <span>批量导入数据</span>
         </p>
@@ -53,6 +55,7 @@ $this->title = 'lists';
         data: {
             isShow: false,
             value2: '',
+	    total:100,
             value3: '',
             columns1: [
                 {
@@ -162,6 +165,9 @@ $this->title = 'lists';
             data1: <?=$coupons?>
         },
         methods:{
+	    changepage: function(index){
+		alert(index);		
+	     },
             checkForm: function (e) {
                 if (this.name && this.age) {
                     return true;

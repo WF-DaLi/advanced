@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'static/js/vue/vue.min.js',
         'plugins/layui/layui.js',
         'static/js/vue/iview.min.js',
+        'static/js/echarts/echarts.min.js',
     ];
     public $jsOptions = [
         //定义js在页面的位置在head标签内部。

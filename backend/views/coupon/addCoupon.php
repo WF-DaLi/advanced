@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'M2 add';
+$this->title = '添加券';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 ?>
@@ -10,29 +10,49 @@ use yii\widgets\ActiveForm;
     <div class="m-title">
         添加券
     </div>
-    <div class="col-lg-6 " style="margin-top:10px;">
+    <div class="col-lg-6 " style="margin-top:10px;width:100%;">
         <i-form :model="formItem" :label-width="80">
-            <Form-item label="Name">
-                <i-input v-model="formItem.input" placeholder="Enter something..."></i-input>
+            <Form-item label="名称">
+                <i-input style="width:800px;"  v-model="formItem.input" placeholder="输入券名字"></i-input>
             </Form-item>
-            <Form-item label="From">
+            <Form-item label="描述">
+                <i-input v-model="formItem.textarea" style="width: 1000px;" type="textarea" :autosize="{minRows: 3,maxRows: 5}" placeholder="Enter something..."></i-input>
+            </Form-item>
+            <Form-item label="回调url">
+                <i-input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></i-input>
+            </Form-item>
+            <Form-item label="设置有效期">
+                <Row>
+                    <Col span="11">
+                    <Date-Picker type="date" placeholder="选择开始日期" v-model="formItem.date"></Date-Picker>
+                    <Time-Picker type="time" placeholder="Select time" v-model="formItem.time"></Time-Picker>
+                    </Col> --  
+		    <Col span = "11">
+                    <Date-Picker type="date" placeholder="选择结束日期" v-model="formItem.date"></Date-Picker>
+                    <Time-Picker type="time" placeholder="Select time" v-model="formItem.time"></Time-Picker>
+		    </Col>
+                </Row>
+            </Form-item>
+            <Form-item label="选择来源">
                 <i-select v-model="formItem.opt" required style="width:200px">
                     <i-option v-for="item in formItem.select" :value="item.ID" >{{ item.name }}</i-option>
                 </i-select>
             </Form-item>
-            <Form-item label="DateShow">
-                <Row>
-                    <Col span="11">
-                    <Date-Picker type="date" placeholder="Select date" v-model="formItem.date"></Date-Picker>
-                    </Col>
-                    <Col span="2" style="text-align: center">-</Col>
-                    <Col span="11">
-                    <Time-Picker type="time" placeholder="Select time" v-model="formItem.time"></Time-Picker>
-                    </Col>
-                </Row>
-            </Form-item>
+	    <div style="width:100%;float:left;height:30px;">
+            	<Form-item label="价格" style="float:left;width:150px;">
+                	<i-input style="width:100px;" v-model="formItem.input" ></i-input>
+            	</Form-item>
+            	<Form-item label="券价格" style="margin-left:20px;float:left;width:150px;">
+			<i-input style="width:100px;" v-model="formItem.input"></i-input>
+	    	</Form-item></br></br>
+	    </div>
+	    <Form-item label="上传图片" style="margin-top:80px;">
+		    <Upload action="//jsonplaceholder.typicode.com/posts/">
+        		<i-button icon="ios-cloud-upload-outline">上传文件</i-button>
+   	 	    </Upload>
+	    </Form-item>
             <Form-item label="Radio">
-                <RadioGroup v-model="formItem.radio">
+                <RadioGroup v-model="formItem.radio" style="height:20px;">
                     <Radio label="male">Male</Radio>
                     <Radio label="female">Female</Radio>
                 </RadioGroup>
@@ -54,13 +74,11 @@ use yii\widgets\ActiveForm;
             <Form-item label="Slider">
                 <Slider v-model="formItem.slider" range></Slider>
             </Form-item>
-            <Form-item label="Text">
-                <i-input v-model="formItem.textarea" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></i-input>
-            </Form-item>
             <Form-item>
                 <i-button type="primary" @click="addItem()">Submit</i-button>
                 <i-button style="margin-left: 8px">Cancel</i-button>
             </Form-item>
+	    </Form-item>
         </i-form>
     </div>
 </div>

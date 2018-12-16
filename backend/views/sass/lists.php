@@ -39,6 +39,25 @@ $this->title = 'Sass lists';
                     width:200
                 },
                 {
+                    title: 'logo',
+                    key: 'logo',
+                    width:200,
+                    render:function (h,param) {
+                        var imgUrl = param.row.logo;
+                        return h('img',
+                            {
+//                                style:{
+//                                    width:"32px",
+//                                    height:"32px"
+//                                },
+                                attrs: {
+                                    src: imgUrl,
+                                    style: 'width: 16px;height: 16px;border-radius: 2px;'
+                                }
+                            },);
+                    }
+                },
+                {
                     title: '状态',
                     key:'status',
                     render:function (h,param) {
@@ -68,15 +87,16 @@ $this->title = 'Sass lists';
 		       var optionStatus = '';
 		       if(status == 0){
 		            optionName = '启用';	  
-			    optionColor = 'green';
-			    optionStatus = 1;
-			}else{
+					optionColor = 'green';
+					optionStatus = 1;
+				}else{
 		            optionName = '禁用';		
 		            optionColor = 'red';
-			    optionStatus = 0;
-			}
+			        optionStatus = 0;
+				}
+					
                        var opt = [
-                           h('span',{
+					    h('span',{
                                style:{
                                    color:optionColor,
                                },
@@ -86,7 +106,18 @@ $this->title = 'Sass lists';
                                    }
                                }
                                 },optionName),
-	
+						h('span',{
+								style:{
+										color:'red',	
+										margin:'10px',
+									},		
+								on:{
+									click:function(){
+										app.updateStatus(sass_id,-1)
+									}
+								}	
+										
+								 },'删除')	
                        	    ];
                        return h('a',opt)
                     }

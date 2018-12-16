@@ -15,6 +15,7 @@ class AdminController extends Controller
 
         public function init()
         {
+//            var_dump(\Yii::$app->authManager);die;
             $this->user = Yii ::$app->user->identity->username?? '';
 	    //$this->user = 'admin';
         }

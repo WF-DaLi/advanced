@@ -1,0 +1,16 @@
+{
+  "name": "mlab",
+  "version": "1.0.0",
+  "description": "mlab",
+  "main": "index.js",
+  "author": "eric",
+  "license": "MIT",
+  "dependencies": {
+    "echarts": "^4.2.0-rc.2"
+  },
+  
+	 "name":"echarts",
+	 "main":"echarts.all.js"
+	
+  
+}

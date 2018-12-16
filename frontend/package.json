@@ -1,0 +1,17 @@
+{
+  "name": "mlab_frontend",
+  "version": "1.0.0",
+  "description": "frontend",
+  "main": "index.js",
+  "author": "eric",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "echarts": "^4.2.0-rc.2",
+    "element-ui": "^2.4.11",
+    "vue": "^2.5.17"
+  },
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
+  }
+}

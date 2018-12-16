@@ -37,6 +37,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

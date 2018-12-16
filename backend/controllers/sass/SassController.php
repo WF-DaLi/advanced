@@ -58,8 +58,9 @@
         {
          //   $this->layout_user = Yii::$app->user->identity->username;
 	        $query = new Query;
-            $res = $query->select(['id', 'name','status'])
+            $res = $query->select(['id', 'name','status','logo'])
                         ->from('sass')
+						->where(['status'=>[0,1]])
                         ->orderBy('id')
                         ->all();
             return $this->render('/sass/lists',['sass'=>json_encode($res,JSON_UNESCAPED_UNICODE )]);
@@ -72,9 +73,11 @@
         public function actionAddsass()
         {
             $sassName = Yii::$app->request->post('name');
+            $logo = Yii::$app->request->post('logo');
             if(!empty($sassName)){
                 $sass = new Sass();
                 $sass->name = $sassName;
+                $sass->logo = $logo;
                 $sass->save();
             }	
         }

@@ -4,8 +4,9 @@
 
 $this->title = 'add sass';
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 ?>
+<?= Html::csrfMetaTags() ?>
+
 <div id="app" >
     <div class="m-title">
         添加 sass 来源
@@ -14,6 +15,16 @@ use yii\widgets\ActiveForm;
         <i-form :model="sassName" :label-width="80">
             <Form-item label="name">
                 <i-input v-model="sassName" placeholder="sass 来源..." id="sass_name" ></i-input>
+            </Form-item>
+            <Form-item label="上传logo">
+                <Upload
+                        :on-success = "success"
+                        action="/index.php?r=/common/upload/upload"
+                        name="file">
+                    <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                    <i-button icon="ios-cloud-upload-outline">上传文件</i-button><div style="margin-left:110px;margin-top:-30px;">(文件宽高限制16*16)</div>
+
+                </Upload>
             </Form-item>
             <Form-item>
                 <i-button type="primary" v-on:click="addsass(sassName)">Submit</i-button>
@@ -25,7 +36,8 @@ use yii\widgets\ActiveForm;
     const app = new Vue({
         el: '#app',
         data: {
-            sassName:''
+            sassName:'',
+            filePath:''
         },
         methods:{
             checkForm: function (e) {
@@ -38,10 +50,13 @@ use yii\widgets\ActiveForm;
                 }
                 e.preventDefault();
             },
+            success:function(res, file){
+                this.filePath = res;
+            },
             addsass:function(sassName){
                 var _this = this;
                 if(sassName != ''){
-                    $.post('index.php?r=sass/sass/addsass',{name:sassName},function(){
+                    $.post('index.php?r=sass/sass/addsass',{name:sassName,logo:this.filePath},function(){
                         layui.use(['layer'], function(){
                             var layer = layui.layer;
                             layer.confirm(
@@ -49,7 +64,7 @@ use yii\widgets\ActiveForm;
                                  {
                                      title:'提示',
                                      btn:['确定'],
-                                     closeBtn: 0,  
+                                     closeBtn: 0,
                                      icon:1
                                  },
                                  function(){
@@ -62,3 +77,4 @@ use yii\widgets\ActiveForm;
             }
     })
 </script>
+
